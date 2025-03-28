@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Membership_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="Membership_BusinessDataLogic\**" />
+    <None Remove="Membership_BusinessDataLogic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Membership_BusinessDataLogic\Membership_BusinessDataLogic.csproj" />
+  </ItemGroup>
+
 </Project>
