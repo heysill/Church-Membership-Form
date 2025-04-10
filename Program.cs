@@ -5,7 +5,7 @@ namespace ChurchMembershipForm
 {
     internal class Program
     {
-        static string[] actions = new string[] { "[1] Add Member", "[2] View Members", "[3] Cancel Membership", "[4] Exit" };
+        static string[] actions = new string[] { "[1] Add Member", "[2] View Members", "[3] Cancel Membership", "[4] Update Member ", "[5] Search Member", "[6] Exit" };
         static void Main(string[] args)
         {
             Console.WriteLine("SOUTH CITY HOMES CHRISTIAN BIBLE CHURCH");
@@ -31,11 +31,19 @@ namespace ChurchMembershipForm
                         break;
 
                     case 4:
+                        UpdateMember();
+                        break;
+
+                    case 5:
+                        SearchMember();
+                        break;
+
+                    case 6:
                         Console.WriteLine("Exit");
                         return;
 
                     default:
-                        Console.WriteLine("Invalid choice. Please enter between 1 - 3 only");
+                        Console.WriteLine("Invalid choice. Please enter between 1 - 6 only");
                         break;
                 }
             }
@@ -114,5 +122,58 @@ namespace ChurchMembershipForm
             }
             Console.WriteLine("---------------------");
         }
+        static void UpdateMember()
+        {
+            Console.Write("Enter name of member to update: ");
+            string oldName = Console.ReadLine();
+
+            Console.Write("New Name: ");
+            string newName = Console.ReadLine();
+
+            Console.Write("New Age: ");
+            string newAge = Console.ReadLine();
+
+            Console.Write("New Birthdate [YYYY-MM-DD]: ");
+            string newBirthdate = Console.ReadLine();
+
+            Console.Write("New Address: ");
+            string newAddress = Console.ReadLine();
+
+            Console.Write("New Gmail: ");
+            string newGmail = Console.ReadLine();
+
+            bool updated = BusinessDataLogic.UpdateMember(oldName, newName, newAge, newBirthdate, newAddress, newGmail);
+            if (updated)
+            {
+                Console.WriteLine("Member update successfully. \n");
+            }
+            else
+            {
+                {
+                    Console.WriteLine("Member not found.\n");
+                }
+
+                Console.WriteLine("---------------------");
+
+            }
+        }
+            static void SearchMember()
+            {
+                Console.Write("Enter name to search: ");
+                string name = Console.ReadLine();
+
+                string memberInfo = BusinessDataLogic.SearchMember(name);
+
+                if (string.IsNullOrEmpty(memberInfo))
+                {
+                    Console.WriteLine("Member not found.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Member found:");
+                    Console.WriteLine(memberInfo + "\n");
+                }
+                Console.WriteLine("---------------------");
+            }
+        }
     }
-}
